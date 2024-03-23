@@ -1,0 +1,21 @@
+[debug] [2024-03-22T00:57:43.637Z] ----------------------------------------------------------------------
+[debug] [2024-03-22T00:57:43.639Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\RIMON\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-03-22T00:57:43.639Z] CLI Version:   13.5.2
+[debug] [2024-03-22T00:57:43.639Z] Platform:      win32
+[debug] [2024-03-22T00:57:43.639Z] Node Version:  v18.18.0
+[debug] [2024-03-22T00:57:43.640Z] Time:          Fri Mar 22 2024 06:57:43 GMT+0600 (Bangladesh Standard Time)
+[debug] [2024-03-22T00:57:43.640Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-03-22T00:57:43.644Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-22T00:57:43.644Z] > authorizing via signed-in user (yasiryousuf00@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\Programming-hero\Milestone 12(Backend JWT and Axios)\Module 73 (from module 70,71,72)\car-doctor-server
+

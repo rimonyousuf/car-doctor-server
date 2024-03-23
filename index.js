@@ -26,12 +26,12 @@ const client = new MongoClient(uri, {
 });
 
 const logger = async (req, res, next) => {
-    console.log('called:', req.host, req.originalUrl);
+    console.log('called:', req.host, req.url);
     next()
 }
 
 const verifyToken = async (req, res, next) => {
-    const token = req.cookies?.token;
+    const token = req?.cookies?.token;
     console.log("Value of the token is", token);
     if (!token) {
         return res.status(401).send({ message: 'Forbidden' });
@@ -61,10 +61,15 @@ async function run() {
             res
                 .cookie('token', token, {
                     httpOnly: true,
-                    secure: false,
+                    secure: true,
                     sameSite: 'none'
                 })
                 .send({ success: true });
+        })
+
+        app.post('/logout',async(req,res)=>{
+            const user = req.body;
+            res.clearCookie('token',{maxAge:0}).send({success: true})
         })
 
         app.get('/services', async (req, res) => {
@@ -75,7 +80,7 @@ async function run() {
 
         app.get('/services/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: new ObjectId(id) };
+            const query = { _id: new ObjectId(id) }
             const options = {
                 projection: { title: 1, price: 1, service_id: 1, img: 1 },
             };
@@ -85,14 +90,8 @@ async function run() {
 
         // bookings
 
-        app.post('/bookings', async (req, res) => {
-            const user = req.body;
-            const result = await bookingCollection.insertOne(user);
-            res.send(result);
-        })
-
         app.get('/bookings', logger, verifyToken, async (req, res) => {
-            if(req.query.email !== req.user.email){
+            if(req.user.email !== req.query.email){
                 return res.status(403).send({message: 'Forbidden access'})
             }
             let query = {};
@@ -100,6 +99,12 @@ async function run() {
                 query = { email: req.query.email }
             }
             const result = await bookingCollection.find(query).toArray();
+            res.send(result);
+        })
+
+        app.post('/bookings', async (req, res) => {
+            const user = req.body;
+            const result = await bookingCollection.insertOne(user);
             res.send(result);
         })
 
@@ -111,7 +116,7 @@ async function run() {
                 $set: {
                     status: updateBooking.status
                 },
-            }
+            };
             const result = await bookingCollection.updateOne(filter, updateDoc);
             res.send(result);
         })
